@@ -10,6 +10,12 @@ LOCAL_SRC_FILES:= \
 	ICameraRecordingProxy.cpp \
 	ICameraRecordingProxyListener.cpp
 
+ifeq ($(BOARD_HAVE_MTK_HARDWARE),true)
+LOCAL_SRC_FILES += \
+	MtkCamera.cpp \
+	MtkCameraParameters.cpp
+endif
+
 LOCAL_SHARED_LIBRARIES := \
 	libcutils \
 	libutils \
@@ -27,6 +33,10 @@ ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
 endif
 ifeq ($(BOARD_USES_QCOM_LEGACY_CAM_PARAMS),true)
 	LOCAL_CFLAGS += -DQCOM_LEGACY_CAM_PARAMS
+endif
+
+ifeq ($(BOARD_HAVE_MTK_HARDWARE),true)
+	LOCAL_CFLAGS += -DMTK_HARDWARE
 endif
 
 LOCAL_MODULE:= libcamera_client
