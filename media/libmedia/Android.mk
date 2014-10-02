@@ -98,3 +98,7 @@ LOCAL_C_INCLUDES := \
     $(call include-path-for, audio-utils)
 
 include $(BUILD_SHARED_LIBRARY)
+
+ifeq ($(BOARD_HAVE_MTK_HARDWARE),true)
+LOCAL_CFLAGS += -DMTK_HARDWARE
+endif
